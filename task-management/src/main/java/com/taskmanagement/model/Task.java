@@ -1,5 +1,6 @@
 package com.taskmanagement.model;
 
+import com.taskmanagement.dto.task.TaskDTO;
 import com.taskmanagement.enums.Priority;
 import com.taskmanagement.enums.Status;
 import jakarta.persistence.*;
@@ -40,6 +41,9 @@ public class Task {
         this.priority = priority;
         this.createdAt = LocalDateTime.now();
         this.updatedAt = LocalDateTime.now();
+    }
+
+    public Task(TaskDTO taskDTO) {
     }
 
     @PrePersist
