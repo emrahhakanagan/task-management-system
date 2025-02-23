@@ -19,7 +19,7 @@ public class TaskServiceImpl implements TaskService {
     @Override
     public List<TaskDTO> getAllTasks() {
         return taskRepository.findAll().stream()
-                .map(TaskDTO::new) // предполагаем, что в DTO есть конструктор из модели
+                .map(TaskDTO::new)
                 .collect(Collectors.toList());
     }
 
