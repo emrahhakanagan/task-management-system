@@ -34,16 +34,13 @@ public class Task {
         this.createdAt = LocalDateTime.now();
     }
 
-    public Task(String title, String description, Status status, Priority priority) {
-        this.title = title;
-        this.description = description;
-        this.status = status;
-        this.priority = priority;
+    public Task(TaskDTO taskDTO) {
+        this.title = taskDTO.getTitle();
+        this.description = taskDTO.getDescription();
+        this.status = taskDTO.getStatus();
+        this.priority = taskDTO.getPriority();
         this.createdAt = LocalDateTime.now();
         this.updatedAt = LocalDateTime.now();
-    }
-
-    public Task(TaskDTO taskDTO) {
     }
 
     @PrePersist
