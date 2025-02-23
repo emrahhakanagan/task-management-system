@@ -85,6 +85,11 @@ public class User {
         return role;
     }
 
+    // Только Админ имеет права менять роль пользователя
+    public void setRoleForAdmin(RoleType role) {
+        this.role = role;
+    }
+
     public boolean isActive() {
         return isActive;
     }
