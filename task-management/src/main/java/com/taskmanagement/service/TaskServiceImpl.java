@@ -2,7 +2,7 @@ package com.taskmanagement.service;
 
 import com.taskmanagement.dto.task.TaskDTO;
 import com.taskmanagement.model.Task;
-import com.taskmanagement.repository.TaskRepository;
+import com.taskmanagement.repository.task.TaskRepository;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.UUID;
