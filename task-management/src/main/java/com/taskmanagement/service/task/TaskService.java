@@ -1,4 +1,4 @@
-package com.taskmanagement.service;
+package com.taskmanagement.service.task;
 
 import com.taskmanagement.dto.task.TaskDTO;
 import java.util.List;

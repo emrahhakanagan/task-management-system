@@ -1,8 +1,7 @@
 package com.taskmanagement.controller;
 
 import com.taskmanagement.dto.task.TaskDTO;
-import com.taskmanagement.service.TaskService;
-import com.taskmanagement.service.TaskServiceImpl;
+import com.taskmanagement.service.task.TaskServiceImpl;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

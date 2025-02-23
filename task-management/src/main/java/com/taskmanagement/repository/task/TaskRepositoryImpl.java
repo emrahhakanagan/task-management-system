@@ -1,4 +1,4 @@
-package com.taskmanagement.repository;
+package com.taskmanagement.repository.task;
 
 import com.taskmanagement.dto.task.TaskFilterDTO;
 import com.taskmanagement.model.Task;
