@@ -32,8 +32,11 @@ public class TaskRepositoryImpl implements TaskRepositoryCustom {
         if (filter.getPriority() != null) {
             predicates.add(cb.equal(task.get("priority"), filter.getPriority()));
         }
-        if (filter.getStartDate() != null && filter.getEndDate() != null) {
-            predicates.add(cb.between(task.get("createdAt"), filter.getStartDate(), filter.getEndDate()));
+        if (filter.getCreatedFrom() != null && filter.getCreatedTo() != null) {
+            predicates.add(cb.between(task.get("createdAt"), filter.getCreatedFrom(), filter.getCreatedTo()));
+        }
+        if (filter.getUpdatedFrom() != null && filter.getUpdatedTo() != null) {
+            predicates.add(cb.between(task.get("updatedAt"), filter.getUpdatedFrom(), filter.getUpdatedTo()));
         }
 
         query.select(task).where(predicates.toArray(new Predicate[0]));
