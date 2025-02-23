@@ -2,6 +2,7 @@ package com.taskmanagement.controller;
 
 import com.taskmanagement.dto.task.TaskDTO;
 import com.taskmanagement.service.TaskService;
+import com.taskmanagement.service.TaskServiceImpl;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,9 +13,9 @@ import java.util.UUID;
 @RequestMapping("/api/tasks")
 public class TaskController {
 
-    private final TaskService taskService;
+    private final TaskServiceImpl taskService;
 
-    public TaskController(TaskService taskService) {
+    public TaskController(TaskServiceImpl taskService) {
         this.taskService = taskService;
     }
 
