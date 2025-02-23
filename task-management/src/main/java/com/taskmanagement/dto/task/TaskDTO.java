@@ -2,6 +2,8 @@ package com.taskmanagement.dto.task;
 
 import com.taskmanagement.enums.Priority;
 import com.taskmanagement.enums.Status;
+import com.taskmanagement.model.Task;
+
 import java.util.UUID;
 
 public class TaskDTO {
@@ -13,12 +15,12 @@ public class TaskDTO {
 
     public TaskDTO() {}
 
-    public TaskDTO(UUID id, String title, String description, Status status, Priority priority) {
-        this.id = id;
-        this.title = title;
-        this.description = description;
-        this.status = status;
-        this.priority = priority;
+    public TaskDTO(Task task) {
+        this.id = task.getId();
+        this.title = task.getTitle();
+        this.description = task.getDescription();
+        this.status = task.getStatus();
+        this.priority = task.getPriority();
     }
 
     public UUID getId() {
