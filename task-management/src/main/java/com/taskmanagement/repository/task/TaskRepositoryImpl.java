@@ -5,6 +5,8 @@ import com.taskmanagement.model.Task;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.criteria.*;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +18,7 @@ public class TaskRepositoryImpl implements TaskRepositoryCustom {
     private EntityManager entityManager;
 
     @Override
-    public List<Task> findTasksByFilters(TaskFilterDTO filter) {
+    public Page<Task> findTasksByFilters(TaskFilterDTO filter, Pageable pageable) {
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
         CriteriaQuery<Task> query = cb.createQuery(Task.class);
         Root<Task> task = query.from(Task.class);
@@ -40,6 +42,16 @@ public class TaskRepositoryImpl implements TaskRepositoryCustom {
         }
 
         query.select(task).where(predicates.toArray(new Predicate[0]));
-        return entityManager.createQuery(query).getResultList();
+
+        List<Task> tasks = entityManager.createQuery(query)
+                .setFirstResult((int) pageable.getOffset())
+                .setMaxResults(pageable.getPageSize())
+                .getResultList();
+
+        long totalResults = entityManager.createQuery(cb.createQuery(Long.class)
+                .select(cb.count(task))
+                .where(predicates.toArray(new Predicate[0]))).getSingleResult();
+
+        return new org.springframework.data.domain.PageImpl<>(tasks, pageable, totalResults);
     }
 }
