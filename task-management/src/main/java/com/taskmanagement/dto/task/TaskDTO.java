@@ -36,10 +36,6 @@ public class TaskDTO {
         return id;
     }
 
-    public void setId(UUID id) {
-        this.id = id;
-    }
-
     public String getTitle() {
         return title;
     }

@@ -62,13 +62,8 @@ public class Task {
         this.updatedAt = LocalDateTime.now();
     }
 
-    // Геттеры и сеттеры
     public UUID getId() {
         return id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
     }
 
     public String getTitle() {
@@ -119,15 +114,7 @@ public class Task {
         return createdAt;
     }
 
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
-
     public LocalDateTime getUpdatedAt() {
         return updatedAt;
-    }
-
-    public void setUpdatedAt(LocalDateTime updatedAt) {
-        this.updatedAt = updatedAt;
     }
 }
