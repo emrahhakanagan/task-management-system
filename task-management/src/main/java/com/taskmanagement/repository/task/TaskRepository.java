@@ -11,6 +11,5 @@ import java.util.UUID;
 
 @Repository
 public interface TaskRepository extends JpaRepository<Task, UUID> {
-    Page<Task> findByAssignedUserId(Long userId, Pageable pageable);
     Page<Task> findTasksByFilters(TaskFilterDTO filter, Pageable pageable);
 }
