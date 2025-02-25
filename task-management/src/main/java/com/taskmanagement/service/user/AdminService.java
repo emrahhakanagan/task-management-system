@@ -4,6 +4,7 @@ import com.taskmanagement.dto.user.UserFilterDTO;
 import com.taskmanagement.model.User;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 public interface AdminService {
     Optional<User> getUserById(Long userId);
@@ -11,4 +12,5 @@ public interface AdminService {
     List<User> getUsersByFilters(UserFilterDTO filter);
     void updateUserRole(Long userId, String role);
     void toggleUserActivation(Long userId, boolean isActive, String adminName);
+    void reassignTask(UUID taskId, Long newUserId);
 }

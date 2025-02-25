@@ -12,6 +12,7 @@ public class TaskDTO {
     private String description;
     private Status status;
     private Priority priority;
+    private Long assignedUserId;
 
     public TaskDTO() {}
 
@@ -21,6 +22,7 @@ public class TaskDTO {
         this.description = task.getDescription();
         this.status = task.getStatus();
         this.priority = task.getPriority();
+        this.assignedUserId = task.getAssignedUser() != null ? task.getAssignedUser().getId() : null;
     }
 
     public UUID getId() {

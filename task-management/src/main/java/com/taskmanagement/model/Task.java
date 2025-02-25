@@ -27,6 +27,10 @@ public class Task {
     @Enumerated(EnumType.STRING)
     private Priority priority;
 
+    @ManyToOne
+    @JoinColumn(name = "assigned_user_id")
+    private User assignedUser;
+
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
@@ -92,6 +96,14 @@ public class Task {
 
     public void setPriority(Priority priority) {
         this.priority = priority;
+    }
+
+    public User getAssignedUser() {
+        return assignedUser;
+    }
+
+    public void setAssignedUser(User assignedUser) {
+        this.assignedUser = assignedUser;
     }
 
     public LocalDateTime getCreatedAt() {
