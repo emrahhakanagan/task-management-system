@@ -5,6 +5,8 @@ import com.taskmanagement.dto.task.TaskFilterDTO;
 import com.taskmanagement.enums.Priority;
 import com.taskmanagement.enums.Status;
 import com.taskmanagement.service.task.TaskServiceImpl;
+import com.taskmanagement.service.user.AdminService;
+import com.taskmanagement.service.user.AdminServiceImpl;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -20,10 +22,13 @@ import java.util.UUID;
 public class TaskController {
 
     private final TaskServiceImpl taskService;
+    private final AdminServiceImpl adminService;
 
-    public TaskController(TaskServiceImpl taskService) {
+    public TaskController(TaskServiceImpl taskService, AdminServiceImpl adminService) {
         this.taskService = taskService;
+        this.adminService = adminService;
     }
+
 
     @GetMapping
     public ResponseEntity<List<TaskDTO>> getAllTasks() {
@@ -50,22 +55,44 @@ public class TaskController {
         return ResponseEntity.ok(taskService.getTasksByFilters(filter, pageable));
     }
 
-    @PostMapping
+    //    @PreAuthorize("hasRole('ADMIN')")
+    @PostMapping("/admin/tasks")
     public ResponseEntity<TaskDTO> createTask(@RequestBody TaskDTO taskDTO) {
-        return ResponseEntity.ok(taskService.createTask(taskDTO));
+        return ResponseEntity.ok(adminService.createTask(taskDTO));
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/admin/tasks/{id}")
     public ResponseEntity<TaskDTO> updateTask(
             @PathVariable UUID id,
-            @RequestBody TaskDTO taskDTO,
-            @RequestParam Long userId) {
-        return ResponseEntity.ok(taskService.updateTask(id, taskDTO, userId));
+            @RequestBody TaskDTO taskDTO) {
+        return ResponseEntity.ok(adminService.updateTask(id, taskDTO));
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteTask(@PathVariable UUID id) {
-        taskService.deleteTask(id);
+    @PatchMapping("/admin/tasks/{id}/status")
+    public ResponseEntity<Void> changeTaskStatus(@PathVariable UUID id, @RequestParam Status status) {
+        adminService.changeTaskStatus(id, status);
         return ResponseEntity.noContent().build();
     }
+
+    @PatchMapping("/admin/tasks/{id}/priority")
+    public ResponseEntity<Void> changeTaskPriority(@PathVariable UUID id, @RequestParam Priority priority) {
+        adminService.changeTaskPriority(id, priority);
+        return ResponseEntity.noContent().build();
+    }
+
+    @DeleteMapping("/admin/tasks/{id}")
+    public ResponseEntity<Void> deleteTask(@PathVariable UUID id) {
+        adminService.deleteTask(id);
+        return ResponseEntity.noContent().build();
+    }
+
+    @PostMapping("/admin/tasks/{id}/comment")
+    public ResponseEntity<Void> addAdminComment(
+            @PathVariable UUID id,
+            @RequestParam String text,
+            @RequestParam Long adminId) {
+        adminService.addAdminComment(id, text, adminId);
+        return ResponseEntity.noContent().build();
+    }
+
 }
