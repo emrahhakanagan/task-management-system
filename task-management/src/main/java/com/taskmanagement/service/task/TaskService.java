@@ -8,6 +8,6 @@ public interface TaskService {
     List<TaskDTO> getAllTasks();
     TaskDTO getTaskById(UUID id);
     TaskDTO createTask(TaskDTO taskDTO);
-    TaskDTO updateTask(UUID id, TaskDTO taskDTO);
+    TaskDTO updateTask(UUID id, TaskDTO taskDTO, Long userId);
     void deleteTask(UUID id);
 }

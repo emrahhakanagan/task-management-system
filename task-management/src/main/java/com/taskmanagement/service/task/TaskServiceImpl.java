@@ -37,15 +37,16 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public TaskDTO updateTask(UUID id, TaskDTO taskDTO) {
+    public TaskDTO updateTask(UUID id, TaskDTO taskDTO, Long userId) {
         Task task = taskRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Task not found"));
 
-        task.setTitle(taskDTO.getTitle());
-        task.setDescription(taskDTO.getDescription());
-        task.setStatus(taskDTO.getStatus());
-        task.setPriority(taskDTO.getPriority());
+        // Проверяем, является ли пользователь исполнителем
+        if (!task.getAssignedUser().getId().equals(userId)) {
+            throw new RuntimeException("You are not authorized to update this task");
+        }
 
+        task.setStatus(taskDTO.getStatus());
         return new TaskDTO(taskRepository.save(task));
     }
 

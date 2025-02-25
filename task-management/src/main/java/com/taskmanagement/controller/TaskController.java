@@ -34,8 +34,11 @@ public class TaskController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<TaskDTO> updateTask(@PathVariable UUID id, @RequestBody TaskDTO taskDTO) {
-        return ResponseEntity.ok(taskService.updateTask(id, taskDTO));
+    public ResponseEntity<TaskDTO> updateTask(
+            @PathVariable UUID id,
+            @RequestBody TaskDTO taskDTO,
+            @RequestParam Long userId) {
+        return ResponseEntity.ok(taskService.updateTask(id, taskDTO, userId));
     }
 
     @DeleteMapping("/{id}")
