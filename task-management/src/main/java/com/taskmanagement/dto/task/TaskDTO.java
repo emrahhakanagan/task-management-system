@@ -67,4 +67,12 @@ public class TaskDTO {
     public void setPriority(Priority priority) {
         this.priority = priority;
     }
+
+    public List<CommentDTO> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<CommentDTO> comments) {
+        this.comments = comments;
+    }
 }
