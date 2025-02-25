@@ -1,8 +1,11 @@
 package com.taskmanagement.service.task;
 
 import com.taskmanagement.dto.task.TaskDTO;
+import com.taskmanagement.dto.task.TaskFilterDTO;
 import com.taskmanagement.model.Task;
 import com.taskmanagement.repository.task.TaskRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.UUID;
@@ -21,6 +24,12 @@ public class TaskServiceImpl implements TaskService {
         return taskRepository.findAll().stream()
                 .map(TaskDTO::new)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public Page<TaskDTO> getTasksByFilters(TaskFilterDTO filter, Pageable pageable) {
+        return taskRepository.findTasksByFilters(filter, pageable)
+                .map(TaskDTO::new);
     }
 
     @Override
