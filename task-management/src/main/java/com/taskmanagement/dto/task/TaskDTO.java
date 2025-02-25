@@ -4,7 +4,9 @@ import com.taskmanagement.enums.Priority;
 import com.taskmanagement.enums.Status;
 import com.taskmanagement.model.Task;
 
+import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 public class TaskDTO {
     private UUID id;
@@ -13,6 +15,7 @@ public class TaskDTO {
     private Status status;
     private Priority priority;
     private Long assignedUserId;
+    private List<CommentDTO> comments;
 
     public TaskDTO() {}
 
@@ -23,6 +26,10 @@ public class TaskDTO {
         this.status = task.getStatus();
         this.priority = task.getPriority();
         this.assignedUserId = task.getAssignedUser() != null ? task.getAssignedUser().getId() : null;
+        this.comments = task.getComments().stream()
+                .map(CommentDTO::new)
+                .collect(Collectors.toList());
+
     }
 
     public UUID getId() {
